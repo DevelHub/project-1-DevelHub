@@ -1,0 +1,3 @@
+1.	npm install --save axios bootstrap jquery popper.js react-redux react-router redux redux-thunk react-dom react-router-dom
+2.	npm install -D @types/enzyme @types/enzyme-adapter-react-16 @types/react-redux @types/react-router @types/react-router-dom enzyme enzyme-adapter-react-16
+3.	npm install --save tether

@@ -1,0 +1,14 @@
+"rules": {
+    "ordered-imports": false,
+
+    "jsx-self-close": false,
+
+    "jsx-no-lambda": false,
+
+    "no-console": false,
+
+    "jsx-no-bind": false,
+
+    "jsx-boolean-value": false
+
+  }

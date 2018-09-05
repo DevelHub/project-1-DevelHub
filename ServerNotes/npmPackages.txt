@@ -1,0 +1,4 @@
+Note: copy paste dependencies to package.json
+
+1.	npm install --save body-parser express express-session pg
+	npm install --save typescript Note:(unsure)
