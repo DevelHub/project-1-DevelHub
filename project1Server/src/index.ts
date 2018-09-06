@@ -18,8 +18,8 @@ app.set('port', port);
 const sess = {
   secret: 'keyboard cat',
   cookie: {secure: false},
-  resave: true,
-  saveUninitialized: true
+  resave: false,
+  saveUninitialized: false
 };
 
 if (app.get('env') === 'production') {
