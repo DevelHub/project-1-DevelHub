@@ -1,0 +1,27 @@
+version: 0.1
+environment_variables:
+    plaintext:
+        S3_BUCKET: "1808-demo-bucket-mubaraq"
+phases:
+    install:
+        commands:
+            - echo Installing source NPM dependencies...
+            - cd project1React && npm install
+    build:
+        commands:
+            - echo Build started on `date`
+            - cd project1React && npm run build
+    post_build:
+        commands:
+            - echo "$CODEBUILD_BUILD_SUCCEEDING"
+            # if build succeeds copy the dist folder into the s3 bucket
+            - |
+                if [ "$CODEBUILD_BUILD_SUCCEEDING" = "1" ]; then
+                    aws s3 cp "project1React/build" "s3://${S3_BUCKET}" "--recursive";
+                    echo "Build completed on date";
+                fi
+artifacts:
+    files:
+        - '**/*'
+    base-directory: 'project1React/build*'
+    discard-paths: yes

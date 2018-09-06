@@ -127,6 +127,7 @@ export class App extends React.Component<any, any> {
                       </tr>
                   </thead>
                 </table> }
+                {/* <Route component={LoginComponent} /> */}
               </Switch>
         </div>
       </BrowserRouter>
