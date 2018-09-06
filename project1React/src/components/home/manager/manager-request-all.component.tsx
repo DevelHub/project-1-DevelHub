@@ -99,7 +99,8 @@ export class ManagerRequestsAll extends React.Component<any, any> {
                     this.setState({
                         ...this.state,
                         showExtra: false,
-                        showTable: true
+                        showTable: true,
+                        valid: false
                     });
                     this.componentDidMount();
                     return;
