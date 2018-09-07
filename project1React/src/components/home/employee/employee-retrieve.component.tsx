@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { environment } from 'environment';
+import { environment } from '../../../environment';
 
 export class EmployeeRetrieve extends React.Component<any, any> {
 

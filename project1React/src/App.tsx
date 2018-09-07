@@ -9,7 +9,7 @@ import { EmployeeRequest } from './components/home/employee/employee-request.com
 import { AppNav } from './components/nav/nav.component';
 import { EmployeeRetrieve } from './components/home/employee/employee-retrieve.component';
 import { ManagerRequestsAll } from './components/home/manager/manager-request-all.component';
-import { environment } from 'environment';
+import { environment } from './environment';
 
 export class App extends React.Component<any, any> {
 

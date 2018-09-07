@@ -1,6 +1,7 @@
 import * as React from 'react';
 import '../../App.css';
 import '../../include/bootstrap'
+import { environment } from '../../environment';
 // interface IState {
 //     credentials: {
 //         password: string,
@@ -46,7 +47,7 @@ export class LoginComponent extends React.Component<any, any> {
     public submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch('http://ec2-34-210-54-222.us-west-2.compute.amazonaws.com:4000/login', {
+        fetch(environment.context + 'login', {
             body: JSON.stringify(this.state.credentials),
             credentials: 'include',
             headers: {
