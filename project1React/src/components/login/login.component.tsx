@@ -1,16 +1,16 @@
 import * as React from 'react';
 import '../../App.css';
 import '../../include/bootstrap'
-interface IState {
-    credentials: {
-        password: string,
-        username: string
-    },
-    errorMessage: string
-}
+// interface IState {
+//     credentials: {
+//         password: string,
+//         username: string
+//     },
+//     errorMessage: string
+// }
 
 // export class SignInComponent extends React.Component<RouteComponentProps<{}>, IState> {
-export class LoginComponent extends React.Component<IState, any> {
+export class LoginComponent extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
