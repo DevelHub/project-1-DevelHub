@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { environment } from 'environment';
 
 export class EmployeeRetrieve extends React.Component<any, any> {
 
@@ -11,7 +12,7 @@ export class EmployeeRetrieve extends React.Component<any, any> {
     }
 
     public componentDidMount() {
-        fetch(`http://localhost:4000/reimbursements/retrieve/0`, {
+        fetch(environment.context + 'reimbursements/retrieve/0', {
             credentials: 'include',
             headers: {
               'Accept': 'application/json',

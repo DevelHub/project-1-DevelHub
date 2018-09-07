@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { environment } from 'environment';
 
 export class ManagerRequestsAll extends React.Component<any, any> {
 
@@ -15,7 +16,7 @@ export class ManagerRequestsAll extends React.Component<any, any> {
     }
 
     public componentDidMount() {
-        fetch(`http://localhost:4000/reimbursements/retrieve-all`, {
+        fetch(environment.context + 'reimbursements/retrieve-all', {
             credentials: 'include',
             headers: {
               'Accept': 'application/json',

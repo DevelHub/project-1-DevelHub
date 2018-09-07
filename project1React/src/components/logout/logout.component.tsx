@@ -1,8 +1,6 @@
 import * as React from 'react';
-// import { AppNav } from '../nav/nav.component';
-// import { varify } from '../test';
 
-export class HomeComponent extends React.Component<any, any> {
+export class LogoutComponent extends React.Component<any, any> {
 
     constructor(props: any) {
         super(props);
@@ -11,12 +9,7 @@ export class HomeComponent extends React.Component<any, any> {
     public render() {
 
         return (
-          <div id="homePage">
-                
-            {/* Navigation  */}
-            {/* <AppNav /> */}
-
-            {/* Sliders  */}
+          <div>
             <header>
               <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
                 <ol className="carousel-indicators">

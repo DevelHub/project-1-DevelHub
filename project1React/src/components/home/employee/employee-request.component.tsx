@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { environment } from 'environment';
 
 export class EmployeeRequest extends React.Component<any, any> {
 
@@ -41,7 +42,7 @@ export class EmployeeRequest extends React.Component<any, any> {
         const typeId = this.state.type;
     
         const reimbursement = { amount, submitted, description, typeId };
-        fetch('http://localhost:4000/reimbursements/insert', {
+        fetch(environment.context + 'reimbursements/insert', {
             body: JSON.stringify(reimbursement),
             credentials: 'include',
             headers: {

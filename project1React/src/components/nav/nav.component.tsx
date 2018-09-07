@@ -33,6 +33,9 @@ export const AppNav: React.StatelessComponent<{}> = () => {
                     <li className="nav-item">
                       <a className="nav-link" href="#">Contact</a>
                     </li>
+                    <li className="nav-item">
+                      <Link to="/logout" className="nav-link">Logout</Link>
+                    </li>
                   </ul>
                 </div>
               </div>

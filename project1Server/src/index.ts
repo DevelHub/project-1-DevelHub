@@ -11,8 +11,8 @@ import { userRouter } from './routers/user-router';
 const app = express();
 
 // set the port
-// const port = process.env.PORT || 3000; // will use port from computers environment variables or 3000 if there is none
-const port = 4000;
+const port = process.env.PORT || 4000; // will use port from computers environment variables or 3000 if there is none
+// const port = 4000;
 app.set('port', port);
 
 const sess = {
@@ -43,11 +43,21 @@ app.use(
 // use the body parser to convert request json
 app.use(bodyParser.json());
 
-// allows cors headers
+// // allows cors headers
+// app.use((req, resp, next) => {
+//   resp.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   resp.header("Access-Control-Allow-Credentials", "true");
+//   next();
+// });
+// allow cross origins
 app.use((req, resp, next) => {
-  resp.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  resp.header("Access-Control-Allow-Credentials", "true");
+  (process.env.ERS_API_STAGE === 'prod')
+    ? resp.header('Access-Control-Allow-Origin', process.env.DEMO_APP_URL)
+    : resp.header('Access-Control-Allow-Origin', `http://1808-demo-bucket-mubaraq.s3-website-us-east-1.amazonaws.com`);
+  // resp.header('Access-Control-Allow-Origin', `http://localhost:3000`);
+  resp.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  resp.header('Access-Control-Allow-Credentials', 'true');
   next();
 });
 /*********************************************************************************************

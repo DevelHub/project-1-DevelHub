@@ -46,7 +46,7 @@ export class LoginComponent extends React.Component<any, any> {
     public submit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
-        fetch('http://localhost:4000/login', {
+        fetch('http://ec2-34-210-54-222.us-west-2.compute.amazonaws.com:4000/login', {
             body: JSON.stringify(this.state.credentials),
             credentials: 'include',
             headers: {

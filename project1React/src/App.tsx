@@ -9,6 +9,7 @@ import { EmployeeRequest } from './components/home/employee/employee-request.com
 import { AppNav } from './components/nav/nav.component';
 import { EmployeeRetrieve } from './components/home/employee/employee-retrieve.component';
 import { ManagerRequestsAll } from './components/home/manager/manager-request-all.component';
+import { environment } from 'environment';
 
 export class App extends React.Component<any, any> {
 
@@ -23,7 +24,7 @@ export class App extends React.Component<any, any> {
 
   public componentDidMount() {
 
-      fetch('http://localhost:4000/emp', {
+      fetch(environment.context + 'emp', {
         credentials: 'include'
       })
           .then(resp => {
@@ -56,7 +57,7 @@ export class App extends React.Component<any, any> {
               console.log(err);
           });
       if(!this.state.allowEmployee) {
-        fetch('http://localhost:4000/man', {
+        fetch(environment.context + 'man', {
           credentials: 'include'
         })
             .then(resp => {
@@ -111,6 +112,14 @@ export class App extends React.Component<any, any> {
                 
                 <Route path="/login" component={LoginComponent} />
                 
+                {(!allowAll) &&
+                <table className="table table-hover">
+                  <thead>
+                      <tr>
+                          <th scope="col">404: Page Not Found</th>
+                      </tr>
+                  </thead>
+                </table> }
                 {(allowAll && !allowEmployee) &&
                 <table className="table table-hover">
                   <thead>
