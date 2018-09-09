@@ -1,7 +1,7 @@
 version: 0.1
 environment_variables:
     plaintext:
-        S3_BUCKET: "1808-demo-bucket-mubaraq"
+        S3_BUCKET: "1808-project1-bucket-mubaraq"
 phases:
     install:
         commands:

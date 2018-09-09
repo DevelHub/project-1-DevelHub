@@ -6,10 +6,11 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeRequest } from './components/home/employee/employee-request.component';
-import { AppNav } from './components/nav/nav.component';
+// import { AppNav } from './components/nav/nav.component';
 import { EmployeeRetrieve } from './components/home/employee/employee-retrieve.component';
 import { ManagerRequestsAll } from './components/home/manager/manager-request-all.component';
-import { environment } from './environment';
+// import { environment } from './environment';
+import { LogoutComponent } from './components/logout/logout.component';
 
 export class App extends React.Component<any, any> {
 
@@ -24,95 +25,101 @@ export class App extends React.Component<any, any> {
 
   public componentDidMount() {
 
-      fetch(environment.context + 'emp', {
-        credentials: 'include'
-      })
-          .then(resp => {
-              console.log(resp.status);
-              if (resp.status === 401) {
-                  this.setState({
-                    allowAll: false,
-                    allowEmployee: false,
-                    ...this.state
-                  });
-              }
-              else if (resp.status === 200) {
-                  this.setState({
-                    ...this.state,
-                    allowAll: true,
-                    allowEmployee: true,
-                  });
-                  return;
-              }
-              else {
-                  this.setState({
-                    allowAll: false,
-                    allowEmployee: false,
-                    ...this.state
-                  });
-              }
-              throw new Error('Failed to retrieve page');
-          })
-          .catch(err => {
-              console.log(err);
-          });
-      if(!this.state.allowEmployee) {
-        fetch(environment.context + 'man', {
-          credentials: 'include'
-        })
-            .then(resp => {
-                console.log(resp.status);
-                if (resp.status === 401) {
-                    this.setState({
-                      allowAll: false,
-                      allowManger: false,
-                      ...this.state
-                    });
-                }
-                else if (resp.status === 200) {
-                    this.setState({
-                      ...this.state,
-                      allowAll: true,
-                      allowManger: true
-                    });
-                    return;
-                }
-                else {
-                    this.setState({
-                      allowAll: false,
-                      allowManger: false,
-                      ...this.state
-                    });
-                }
-                throw new Error('Failed to retrieve page');
-            })
-            .catch(err => {
-                console.log(err);
-            });
-      }
+      // fetch(environment.context + 'emp', {
+      //   credentials: 'include'
+      // })
+      //     .then(resp => {
+      //         console.log(resp.status);
+      //         if (resp.status === 401) {
+      //             this.setState({
+      //               allowAll: false,
+      //               allowEmployee: false,
+      //               ...this.state
+      //             });
+      //         }
+      //         else if (resp.status === 200) {
+      //             this.setState({
+      //               ...this.state,
+      //               allowAll: true,
+      //               allowEmployee: true,
+      //             });
+      //             return;
+      //         }
+      //         else {
+      //             this.setState({
+      //               allowAll: false,
+      //               allowEmployee: false,
+      //               ...this.state
+      //             });
+      //         }
+      //         throw new Error('Failed to retrieve page');
+      //     })
+      //     .catch(err => {
+      //         console.log(err);
+      //     });
+      // if(!this.state.allowEmployee) {
+      //   fetch(environment.context + 'man', {
+      //     credentials: 'include'
+      //   })
+      //       .then(resp => {
+      //           console.log(resp.status);
+      //           if (resp.status === 401) {
+      //               this.setState({
+      //                 allowAll: false,
+      //                 allowManger: false,
+      //                 ...this.state
+      //               });
+      //           }
+      //           else if (resp.status === 200) {
+      //               this.setState({
+      //                 ...this.state,
+      //                 allowAll: true,
+      //                 allowManger: true
+      //               });
+      //               return;
+      //           }
+      //           else {
+      //               this.setState({
+      //                 allowAll: false,
+      //                 allowManger: false,
+      //                 ...this.state
+      //               });
+      //           }
+      //           throw new Error('Failed to retrieve page');
+      //       })
+      //       .catch(err => {
+      //           console.log(err);
+      //       });
+      // }
   }
+  
   public render() {
-    const { allowAll, allowEmployee, allowManger } = this.state;
+    // const { allowAll, allowEmployee, allowManger } = this.state;
     return (
       <BrowserRouter>
         <div>
-          {(allowAll) && <AppNav /> }
+          {/* {(allowAll) && <AppNav /> } */}
               <Switch>
-                {(allowAll) &&
-                <Route path="/home" component={HomeComponent} /> }
 
-                {(allowEmployee) &&
-                <Route path="/request" component={EmployeeRequest} /> }
+                {/* {(allowAll) && */}
+                <Route path="/home" component={HomeComponent} /> 
 
-                {(allowEmployee) &&
-                <Route path="/retrieve" component={EmployeeRetrieve} /> }
+                {/* {(allowEmployee) && */}
+                <Route path="/request" component={EmployeeRequest} /> 
 
-                {(allowManger) &&
-                <Route path="/retrieve-all" component={ManagerRequestsAll} /> }
+                {/* {(allowEmployee) && */}
+                <Route path="/retrieve" component={EmployeeRetrieve} /> 
+
+                {/* {(allowManger) && */}
+                <Route path="/retrieve-all" component={ManagerRequestsAll} /> 
                 
+                <Route path="/logout" component={LogoutComponent} />
+
                 <Route path="/login" component={LoginComponent} />
                 
-                {(!allowAll) &&
+                <Route component={LoginComponent} />
+                
+                {/* {(!allowAll) &&
                 <table className="table table-hover">
                   <thead>
                       <tr>
@@ -135,8 +142,7 @@ export class App extends React.Component<any, any> {
                           <th scope="col">This Page is Restricted: Managers Only</th>
                       </tr>
                   </thead>
-                </table> }
-                {/* <Route component={LoginComponent} /> */}
+                </table> } */}
               </Switch>
         </div>
       </BrowserRouter>

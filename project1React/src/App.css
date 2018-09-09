@@ -151,3 +151,28 @@ body {
 .userView {
   margin-top: 35%;
 }
+
+/*****************************
+  Manager View
+*****************************/
+#managerPage {
+  /* margin-top: 136%; */
+  /* margin-top: 160%; */
+  position: absolute;
+  top: 8%;
+  right: 5%;
+  width: 90%;
+}
+.managerHeadLastRowTable {
+  text-indent: 2%;
+}
+.managerBodyTable {
+  text-indent: 2%;
+}
+.managerHoverRow:hover td:last-Child {
+  text-decoration: underline;
+}
+.managerClickColumn:hover {
+  cursor: pointer;
+  color: blue;
+}

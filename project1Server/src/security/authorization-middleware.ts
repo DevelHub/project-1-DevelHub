@@ -1,8 +1,11 @@
 
 export function authMiddleware(...roles: string[]) {
     return (req, resp, next) => {
-      
+
       const user = req.session.user;
+      console.log('user session');
+      console.log(user);
+      
       
       if (!user) {
         resp.sendStatus(401);

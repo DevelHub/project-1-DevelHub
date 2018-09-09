@@ -77,7 +77,7 @@ export class LoginComponent extends React.Component<any, any> {
             })
             .then(resp => {
                 this.props.history.push('/home');
-                window.location.reload();
+                // window.location.reload();
             })
             .catch(err => {
                 console.log(err);
