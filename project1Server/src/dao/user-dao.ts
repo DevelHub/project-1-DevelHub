@@ -4,27 +4,75 @@ import { userConverter } from "../util/user-converter";
 
 
 
+const bcrypt = require('bcrypt');
 
 
 /**
- * Check database credentials when user login
+ * Register user with email if already in database
  */
-export async function findByUsernameAndPassword(username: string, password: string): Promise <User> {
+export async function findByEmail(email: string): Promise <User> {
     const client = await connectionPool.connect();
     try {
         const resp = await client.query(
-            `SELECT
-                ers_users_id, ers_username, user_first_name,
-                user_last_name, user_email, user_role
-            FROM ers.ers_users u JOIN ers.ers_user_roles r
-            ON u.user_role_id = r.ers_user_role_id
-            WHERE u.ers_username = $1 AND u.ers_password = $2`,
-                [username, password]
+            `SELECT * FROM ers.ers_users
+            WHERE user_email = $1`,
+                [email]
         );
         if(resp.rows.length) {
             return userConverter(resp.rows[0]);
         }
         return null;
+    } finally {
+        client.release();
+    }
+}
+
+/**
+ * Offically register user in database, fill out user infomation
+ */
+export async function fillNewUser(username: string, password: string, firstname: string, lastname: string, email: string): Promise <any> {
+    const client = await connectionPool.connect();
+    try {
+        const resp = await client.query(
+            `UPDATE ers.ers_users
+            SET ers_username = $1, ers_password = $2, user_first_name = $3, user_last_name = $4
+            WHERE user_email = $5`,
+                [username, password, firstname, lastname, email]
+        );
+        return resp.rows;
+    } finally {
+        client.release();
+    }
+}
+
+/**
+ * Check database credentials when user login
+ */
+export async function findByUsernameAndPassword(username: string, password: string): Promise <any> {
+    const client = await connectionPool.connect();
+    try {
+        const pass = await client.query(
+            `SELECT ers_password FROM ers.ers_users
+            WHERE ers_username = $1`,
+            [username]
+        );
+        const userDBPassword = pass.rows[0].ers_password;
+        const equal = await bcrypt.compareSync(password, userDBPassword);
+        if(equal) {
+            const resp = await client.query(
+                `SELECT
+                    ers_users_id, ers_username, user_first_name,
+                    user_last_name, user_email, user_role
+                FROM ers.ers_users u JOIN ers.ers_user_roles r
+                ON u.user_role_id = r.ers_user_role_id
+                WHERE u.ers_username = $1 AND u.ers_password = $2`,
+                    [username, userDBPassword]
+            );
+            if(resp.rows.length) {
+                return userConverter(resp.rows[0]);
+            }
+            return null;
+        }
     } finally {
         client.release();
     }

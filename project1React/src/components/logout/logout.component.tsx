@@ -3,7 +3,11 @@ import { environment } from '../../environment';
 
 export const LogoutComponent: React.StatelessComponent<any> = (props) => {
   fetch(environment.context + 'getout', {
-    credentials: 'include'
+    credentials: 'include',
+    headers: {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+    },
   })
     .then(resp => {
         if (resp.status !== 200) {
@@ -19,7 +23,7 @@ export const LogoutComponent: React.StatelessComponent<any> = (props) => {
       <table className="table table-hover userView">
           <thead>
               <tr>
-                  <th scope="col">404: Page Not Found For Logout</th>
+                  <th scope="col">404: Page Not Found</th>
               </tr>
           </thead>
       </table>

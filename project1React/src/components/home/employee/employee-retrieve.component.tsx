@@ -81,63 +81,63 @@ export class EmployeeRetrieve extends React.Component<any, any> {
                 <div>
                     {/* Navigation  */}
                     <AppNav />
-
-                    {/* Display reimbursements */}
-                    {
-                        (show) &&
-                    <table className="table table-hover userView">
-                        <thead>
-                            <tr>
-                                <th scope="col">Type</th>
-                                <th scope="col">Description</th>
-                                <th scope="col">Amount</th>
-                                <th scope="col">Date Submitted</th>
-                                <th scope="col">Status</th>
-                                <th scope="col">Resolver</th>
-                                <th scope="col">Date Resolved</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {
-                                this.state.reimbursements.map((ers: any) => (
-                                    <tr key={ers.reimb_id}>              
-                                        <td>{ers.reimb_type}</td>
-                                        <td>{ers.reimb_description}</td>
-                                        <td>${ers.reimb_amount}</td>
-                                        <td>{ers.reimb_submitted}</td>
-                                        <td>{ers.reimb_status}</td>
-                                        <td>{ers.full_name}</td>
-                                        <td>{ers.reimb_resolved}</td>
+                    <div id="employeeRetrievePage">
+                        {/* Display reimbursements */}
+                        {
+                            (show) &&
+                        <table className="table table-hover userView">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Type</th>
+                                    <th scope="col">Description</th>
+                                    <th scope="col">Amount</th>
+                                    <th scope="col">Date Submitted</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Resolver</th>
+                                    <th scope="col">Date Resolved</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {
+                                    this.state.reimbursements.map((ers: any) => (
+                                        <tr key={ers.reimb_id}>              
+                                            <td>{ers.reimb_type}</td>
+                                            <td>{ers.reimb_description}</td>
+                                            <td>${ers.reimb_amount}</td>
+                                            <td>{ers.reimb_submitted}</td>
+                                            <td>{ers.reimb_status}</td>
+                                            <td>{ers.full_name}</td>
+                                            <td>{ers.reimb_resolved}</td>
+                                        </tr>
+                                    ))
+                                }
+                            </tbody>
+                        </table>
+                        }
+                    </div>
+                        {/* Display no reimbursements */}
+                        {
+                            (showDefault) &&
+                            <table className="table table-hover userView">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Submited Reimbursemnets Are Shown Here</th>
                                     </tr>
-                                ))
-                            }
-                        </tbody>
-                    </table>
-                    }
-                    
-                    {/* Display no reimbursements */}
-                    {
-                        (showDefault) &&
-                        <table className="table table-hover userView">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Submited Reimbursemnets Are Shown Here</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    }
+                                </thead>
+                            </table>
+                        }
 
-                    {/* Ristricted Message */}
-                    {
-                        (unauthorized) &&
-                        <table className="table table-hover userView">
-                            <thead>
-                                <tr>
-                                    <th scope="col">This Page is Restricted: Employees Only</th>
-                                </tr>
-                            </thead>
-                        </table>
-                    }
+                        {/* Ristricted Message */}
+                        {
+                            (unauthorized) &&
+                            <table className="table table-hover userView">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">This Page is Restricted: Employees Only</th>
+                                    </tr>
+                                </thead>
+                            </table>
+                        }
                 </div>
             )
         }

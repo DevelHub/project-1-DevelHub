@@ -69,10 +69,19 @@ nav {
 /*****************************
   Login
 *****************************/
+#loginPlease {
+  color: black;
+  text-align: center;
+}
 .LoginComponent {
-  height: 500px;
-  width: 500px;
-  background-color: #ff6600;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  left: 0px;
+  bottom: 0px;
+  height: 100%;
+  width: 100%;
+  background: url('https://gametalkweb.files.wordpress.com/2016/06/conquest-background-optimized.jpg');
 }
 html,
 body {
@@ -123,10 +132,19 @@ body {
   border-top-left-radius: 0;
   border-top-right-radius: 0;
 }
+#loginRequest {
+  color: black;
+  margin-left: 25%;
+  cursor: pointer;
+  text-decoration: underline;
+}
 
 
 #error-message {
   color: red;
+  margin-left: 15%;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 21px;
 }
 
 /*****************************
@@ -148,16 +166,20 @@ body {
 /*****************************
   Reimbursment Tables
 *****************************/
-.userView {
+/* .userView {
   margin-top: 35%;
+} */
+#employeeRetrievePage {
+  position: absolute;
+  top: 8%;
+  right: 5%;
+  width: 90%;
 }
 
 /*****************************
   Manager View
 *****************************/
 #managerPage {
-  /* margin-top: 136%; */
-  /* margin-top: 160%; */
   position: absolute;
   top: 8%;
   right: 5%;

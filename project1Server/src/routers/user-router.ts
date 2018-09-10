@@ -4,10 +4,90 @@ import * as userDao from '../dao/user-dao';
 import { authMiddleware } from '../security/authorization-middleware';
 
 export const userRouter = express.Router();
+const nodemailer = require('nodemailer');
+const bcrypt = require('bcrypt');
+/**
+ * Register new user with email
+ */
+userRouter.post('/registration', async (req, resp) => {
+    try {
+        const user = await userDao.findByEmail(req.body.email);
+        if(user) {
+            req.session.user = user;
+            const transporter = nodemailer.createTransport({
+                service: 'gmail',
+                auth: {
+                    user: 'soccfutbol16@gmail.com',
+                    pass: 'Danesoccer16'
+                }
+            });
+            let code = "";
+            const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            for (let i = 0; i < 7; i++) {
+                code += possible.charAt(Math.floor(Math.random() * possible.length));
+            }
+            const mailOptions = {
+                from: 'soccfutbol16@gmail.com',
+                to: user.email,
+                subject: 'Smite Battle Ground - Complete Clan Registration',
+                html: `<h1>Please use this private member code to complete your registration</h1>
+                        ${code}
+                        <p>Register here: http://localhost:3000/register</p>`
+            };
+            
+            await transporter.sendMail(mailOptions, function (error, info) {
+                if(error) {
+                    resp.sendStatus(400);
+                }
+                else {
+                    console.log('Email sent: ' + info.response);
+                    req.session.privateCode = code;
+                    console.log(req.session.privateCode);
+                    resp.json(user);
+                }
+            })
+        }
+        else {
+            resp.sendStatus(401);
+        }
+    } catch (err) {
+        console.log(err);
+        resp.sendStatus(500);
+    }
+});
 
-// userRouter.get('', async (req, resp) => {
-//     resp.redirect('http://localhost:3000/login-page/login.html');
-// })
+/**
+ * Officially register new user
+ */
+userRouter.post('/registration/new', async (req, resp) => {
+    try {
+        console.log(req.session.privateCode);
+        if(req.session.privateCode !== req.body.privateCode) {
+            resp.sendStatus(400);
+        }
+        else {
+            const email = req.session.user.email;
+            const password = req.body.password;
+            const saltRounds = 10;
+            // bcrypt.hash(password, saltRounds, async (err, hash) => { 
+                const hash = await bcrypt.hashSync(password, saltRounds);
+                const userNew = await userDao.fillNewUser(req.body.username, hash, req.body.firstname, req.body.lastname, email);
+                const user = await userDao.findByUsernameAndPassword(req.body.username, req.body.password);
+                if(user) {
+                    req.session.privateCode = null;
+                    req.session.user = user;
+                    resp.json(user);
+                }
+                else {
+                    resp.sendStatus(401);
+                }
+            //  })
+        }
+    } catch (err) {
+        console.log(err);
+        resp.sendStatus(500);
+    }
+});
 
 /**
  * Check employee's autherithy
@@ -49,8 +129,6 @@ userRouter.post('/login', async (req, resp) => {
     try {
         const user = await userDao.findByUsernameAndPassword(req.body.username, req.body.password);
         if(user) {
-            console.log('this is session1 ');
-            console.log(req.session);
             req.session.user = user;
             resp.json(user);
         }

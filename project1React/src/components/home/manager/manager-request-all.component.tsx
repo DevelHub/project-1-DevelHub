@@ -416,6 +416,7 @@ export class ManagerRequestsAll extends React.Component<any, any> {
                 <div>
                     {/* Navigation  */}
                     <AppNav />
+                    
                     <div id="managerPage">
                         {
                             (showTable) &&
@@ -462,42 +463,31 @@ export class ManagerRequestsAll extends React.Component<any, any> {
                         }
                         
                         {
-                            (showDefault) &&
-                            <table className="table table-hover userView">
-                                <thead>
-                                    <tr>
-                                        <th scope="col">Submited Reimbursemnets Are shown Here</th>
-                                    </tr>
-                                </thead>
-                            </table>
-                        }
-
-                        {
                             (showExtra) &&
                             
                             <div>
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
                                     <label>First Name</label>
-                                    <input type="text" className="form-control" id="inputEmail4" value={this.state.extraDetails.full_name.split(' ')[1]} disabled={true}/>
+                                    <input type="text" className="form-control form-control-plaintext" readOnly id="inputEmail4" value={this.state.extraDetails.full_name.split(' ')[1]}/>
                                     </div>
                                     <div className="form-group col-md-6">
                                     <label>Last Name</label>
-                                    <input type="text" className="form-control" id="inputPassword4" value={this.state.extraDetails.full_name.split(' ')[0]} disabled={true}/>
+                                    <input type="text" className="form-control form-control-plaintext" readOnly id="inputPassword4" value={this.state.extraDetails.full_name.split(' ')[0]} />
                                     </div>
                                 </div>
                                 <div className="form-group">
                                     <label>Email</label>
-                                    <input type="email" className="form-control" id="inputAddress" value={this.state.extraDetails.user_email} disabled={true}/>
+                                    <input type="email" className="form-control form-control-plaintext" readOnly id="inputAddress" value={this.state.extraDetails.user_email} />
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group col-md-6">
                                     <label>Amount</label>
-                                    <input type="text" className="form-control" id="inputAddress2" value={`$${this.state.extraDetails.reimb_amount}`} disabled={true}/>
+                                    <input type="text" className="form-control form-control-plaintext" readOnly id="inputAddress2" value={`$${this.state.extraDetails.reimb_amount}`} />
                                     </div>
                                     <div className="form-group col-md-6">
                                     <label>Type</label>
-                                    <input type="text" className="form-control" id="inputAddress2" value={this.state.extraDetails.reimb_type} disabled={true}/>
+                                    <input type="text" className="form-control form-control-plaintext" readOnly id="inputAddress2" value={this.state.extraDetails.reimb_type} />
                                     </div>
                                 </div>
                                 <div className="form-row">
@@ -505,19 +495,19 @@ export class ManagerRequestsAll extends React.Component<any, any> {
                                     <label>Description</label>
                                         <textarea
                                             value={this.state.extraDetails.reimb_description}
-                                            className="form-control"
+                                            className="form-control form-control-plaintext" readOnly
                                             id="exampleFormControlTextarea1"
                                             rows={3}
                                             cols={50}
-                                            disabled={true}></textarea>
+                                            ></textarea>
                                     </div>
                                     <div className="form-group col-md-3">
                                     <label>Resolver</label>
-                                    <input type="text" className="form-control" id="inputZip" value={this.state.extraDetails.resolver_name} disabled={true}/>
+                                    <input type="text form-control-plaintext" readOnly className="form-control" id="inputZip" value={this.state.extraDetails.resolver_name} />
                                     </div>
                                     <div className="form-group col-md-3">
                                     <label>Date Resolved</label>
-                                    <input type="text" className="form-control" id="inputZip" value={this.state.extraDetails.reimb_resolved} disabled={true}/>
+                                    <input type="text form-control-plaintext" readOnly className="form-control" id="inputZip" value={this.state.extraDetails.reimb_resolved} />
                                     </div>
                                 </div>
                                 <div className="form-group">
@@ -533,6 +523,17 @@ export class ManagerRequestsAll extends React.Component<any, any> {
                             </div>
                         }
                     </div>
+
+                    {
+                        (showDefault) &&
+                        <table className="table table-hover userView">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Submited Reimbursemnets Are shown Here</th>
+                                </tr>
+                            </thead>
+                        </table>
+                    }
 
                     {/* Ristricted Message */}
                     {

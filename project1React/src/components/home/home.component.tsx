@@ -38,7 +38,7 @@ export class HomeComponent extends React.Component<any, any> {
 
     public render() {
 
-      if(this.state.authenticated) {window.open('mailto:test@example.com');
+      if(this.state.authenticated) {
           return (
             <div id="homePage">
                   

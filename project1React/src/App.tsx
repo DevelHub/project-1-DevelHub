@@ -6,11 +6,10 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import { LoginComponent } from './components/login/login.component';
 import { HomeComponent } from './components/home/home.component';
 import { EmployeeRequest } from './components/home/employee/employee-request.component';
-// import { AppNav } from './components/nav/nav.component';
 import { EmployeeRetrieve } from './components/home/employee/employee-retrieve.component';
 import { ManagerRequestsAll } from './components/home/manager/manager-request-all.component';
-// import { environment } from './environment';
 import { LogoutComponent } from './components/logout/logout.component';
+import { CompleteRegistration } from './components/register/complete-registration.component';
 
 export class App extends React.Component<any, any> {
 
@@ -116,8 +115,10 @@ export class App extends React.Component<any, any> {
                 <Route path="/logout" component={LogoutComponent} />
 
                 <Route path="/login" component={LoginComponent} />
+
+                <Route path="/register" component={CompleteRegistration} />
                 
-                <Route component={LoginComponent} />
+                <Route component={LoginComponent} /> 
                 
                 {/* {(!allowAll) &&
                 <table className="table table-hover">

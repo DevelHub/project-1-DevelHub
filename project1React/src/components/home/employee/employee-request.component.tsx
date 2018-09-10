@@ -109,57 +109,59 @@ export class EmployeeRequest extends React.Component<any, any> {
                     {/* Navigation  */}
                     <AppNav />
 
-                    {/* Restricted Message */}
-                    {(unauthorized) &&
-                    <table className="table table-hover">
-                    <thead>
-                        <tr>
-                            <th scope="col">This Page is Restricted: Employees Only</th>
-                        </tr>
-                    </thead>
-                    </table> }
-                    
-                    {/* Request form */}
-                    {(unauthorized) ||
-                    <form onSubmit = {this.addReimbursement}>
-                        <div className="form-group">
-                            <label htmlFor="exampleFormControlInput1">Amount</label>
-                            <input
-                                onChange={this.amountChange}
-                                value={amount}
-                                type = "number"
-                                min = {1.00} step={0.01}
-                                className="form-control"
-                                id="exampleFormControlInput1"
-                                placeholder="$1.00"/>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleFormControlTextarea1">Description</label>
-                            <textarea
-                                onChange={this.descriptionChange}
-                                value={description}
-                                className="form-control"
-                                id="exampleFormControlTextarea1"
-                                rows={3}
-                                cols={50}></textarea>
-                        </div>
-                        <div className="form-group">
-                            <label htmlFor="exampleFormControlSelect2">Type</label>
-                            <select
-                                multiple
-                                className="form-control"
-                                id="exampleFormControlSelect2"
-                                onChange={this.typeChange}>
-                            <option value="1">Lodging</option>
-                            <option value="2">Travel</option>
-                            <option value="3">Food</option>
-                            <option value="4">Other</option>
-                            </select>
-                        </div>
-                        <div className="form-group">
-                        <button className="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
-                        </div>
-                    </form> }
+                    <div id="employeeRequestPage">
+                        {/* Restricted Message */}
+                        {(unauthorized) &&
+                        <table className="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">This Page is Restricted: Employees Only</th>
+                            </tr>
+                        </thead>
+                        </table> }
+                        
+                        {/* Request form */}
+                        {(unauthorized) ||
+                        <form onSubmit = {this.addReimbursement}>
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlInput1">Amount</label>
+                                <input
+                                    onChange={this.amountChange}
+                                    value={amount}
+                                    type = "number"
+                                    min = {1.00} step={0.01}
+                                    className="form-control"
+                                    id="exampleFormControlInput1"
+                                    placeholder="$1.00"/>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlTextarea1">Description</label>
+                                <textarea
+                                    onChange={this.descriptionChange}
+                                    value={description}
+                                    className="form-control"
+                                    id="exampleFormControlTextarea1"
+                                    rows={3}
+                                    cols={50}></textarea>
+                            </div>
+                            <div className="form-group">
+                                <label htmlFor="exampleFormControlSelect2">Type</label>
+                                <select
+                                    multiple
+                                    className="form-control"
+                                    id="exampleFormControlSelect2"
+                                    onChange={this.typeChange}>
+                                <option value="1">Lodging</option>
+                                <option value="2">Travel</option>
+                                <option value="3">Food</option>
+                                <option value="4">Other</option>
+                                </select>
+                            </div>
+                            <div className="form-group">
+                            <button className="btn btn-lg btn-primary btn-block" type="submit">Submit</button>
+                            </div>
+                        </form> }
+                    </div>
                 </div>
             );
         }
