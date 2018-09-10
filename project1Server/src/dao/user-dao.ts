@@ -53,8 +53,8 @@ export async function findByUsernameAndPassword(username: string, password: stri
     try {
         const pass = await client.query(
             `SELECT ers_password FROM ers.ers_users
-            WHERE ers_username = $1`,
-            [username]
+            WHERE (ers_username = $1 OR user_email = $2)`,
+            [username, username]
         );
         const userDBPassword = pass.rows[0].ers_password;
         const equal = await bcrypt.compareSync(password, userDBPassword);
@@ -65,8 +65,8 @@ export async function findByUsernameAndPassword(username: string, password: stri
                     user_last_name, user_email, user_role
                 FROM ers.ers_users u JOIN ers.ers_user_roles r
                 ON u.user_role_id = r.ers_user_role_id
-                WHERE u.ers_username = $1 AND u.ers_password = $2`,
-                    [username, userDBPassword]
+                WHERE (u.ers_username = $1 OR u.user_email = $2) AND u.ers_password = $3`,
+                    [username, username, userDBPassword]
             );
             if(resp.rows.length) {
                 return userConverter(resp.rows[0]);

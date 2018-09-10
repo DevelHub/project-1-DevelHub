@@ -71,6 +71,7 @@ nav {
 *****************************/
 #loginPlease {
   color: black;
+  font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
   text-align: center;
 }
 .LoginComponent {
@@ -81,7 +82,7 @@ nav {
   bottom: 0px;
   height: 100%;
   width: 100%;
-  background: url('https://gametalkweb.files.wordpress.com/2016/06/conquest-background-optimized.jpg');
+  background: url('https://edge.alluremedia.com.au/m/k/2016/05/smite.jpg');
 }
 html,
 body {
@@ -110,7 +111,7 @@ body {
   margin: 0 auto;
 }
 .form-login .checkbox {
-  font-weight: 400;
+  font-weight: 600;
 }
 .form-login .form-control {
   position: relative;
@@ -134,9 +135,11 @@ body {
 }
 #loginRequest {
   color: black;
-  margin-left: 25%;
+  margin-left: 21%;
   cursor: pointer;
   text-decoration: underline;
+  font-weight: bold;
+  font-size: 21px;
 }
 
 

@@ -18,7 +18,7 @@ export function DateConverter(reimbursements: object[]) {
                     case 6: day = 'Saturday'; break;
                     case 7: day = 'Sunday'; break;
                 }
-                const hour = d.getHours() - 4;
+                const hour = d.getHours();
                 const min = d.getMinutes();
                 const stringMonth = (month < 10) ? '0' + month : month;
                 const stringDate = (date < 10) ? '0' + date : date;
