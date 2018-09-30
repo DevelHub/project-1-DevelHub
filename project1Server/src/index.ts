@@ -44,21 +44,21 @@ app.use(
 app.use(bodyParser.json());
 
 // allows cors headers
-app.use((req, resp, next) => {
-  resp.header("Access-Control-Allow-Origin", "http://localhost:3000");
-  resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-  resp.header("Access-Control-Allow-Credentials", "true");
-  next();
-});
-// allow cross origins
 // app.use((req, resp, next) => {
-//   (process.env.ERS_API_STAGE === 'prod')
-//     ? resp.header('Access-Control-Allow-Origin', process.env.DEMO_APP_URL)
-//     : resp.header('Access-Control-Allow-Origin', `http://1808-project1-bucket-mubaraq.s3-website-us-west-2.amazonaws.com`);
-//   resp.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-//   resp.header('Access-Control-Allow-Credentials', 'true');
+//   resp.header("Access-Control-Allow-Origin", "http://localhost:3000");
+//   resp.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//   resp.header("Access-Control-Allow-Credentials", "true");
 //   next();
 // });
+// allow cross origins
+app.use((req, resp, next) => {
+  (process.env.ERS_API_STAGE === 'prod')
+    ? resp.header('Access-Control-Allow-Origin', process.env.DEMO_APP_URL)
+    : resp.header('Access-Control-Allow-Origin', `http://expense-reimbursement-system-mubaraq.s3-website-us-west-2.amazonaws.com`);
+  resp.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  resp.header('Access-Control-Allow-Credentials', 'true');
+  next();
+});
 /*********************************************************************************************
  * API Routers
  ********************************************************************************************/
