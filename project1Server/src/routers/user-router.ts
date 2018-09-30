@@ -4,57 +4,57 @@ import * as userDao from '../dao/user-dao';
 import { authMiddleware } from '../security/authorization-middleware';
 
 export const userRouter = express.Router();
-const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
+// const nodemailer = require('nodemailer');
+// const bcrypt = require('bcrypt');
 /**
  * Register new user with email
  */
-userRouter.post('/registration', async (req, resp) => {
-    try {
-        const user = await userDao.findByEmail(req.body.email);
-        if(user) {
-            req.session.user = user;
-            const transporter = nodemailer.createTransport({
-                service: 'gmail',
-                auth: {
-                    user: 'soccfutbol16@gmail.com',
-                    pass: 'Danesoccer16'
-                }
-            });
-            let code = "";
-            const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            for (let i = 0; i < 7; i++) {
-                code += possible.charAt(Math.floor(Math.random() * possible.length));
-            }
-            const mailOptions = {
-                from: 'soccfutbol16@gmail.com',
-                to: user.email,
-                subject: 'Smite Battle Ground - Complete Clan Registration',
-                html: `<h1>Please use this private member code to complete your registration</h1>
-                        ${code}
-                        <p>Register here: http://localhost:3000/register</p>`
-            };
+// userRouter.post('/registration', async (req, resp) => {
+//     try {
+//         const user = await userDao.findByEmail(req.body.email);
+//         if(user) {
+//             req.session.user = user;
+//             const transporter = nodemailer.createTransport({
+//                 service: 'gmail',
+//                 auth: {
+//                     user: 'soccfutbol16@gmail.com',
+//                     pass: 'Danesoccer16'
+//                 }
+//             });
+//             let code = "";
+//             const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//             for (let i = 0; i < 7; i++) {
+//                 code += possible.charAt(Math.floor(Math.random() * possible.length));
+//             }
+//             const mailOptions = {
+//                 from: 'soccfutbol16@gmail.com',
+//                 to: user.email,
+//                 subject: 'Smite Battle Ground - Complete Clan Registration',
+//                 html: `<h1>Please use this private member code to complete your registration</h1>
+//                         ${code}
+//                         <p>Register here: http://localhost:3000/register</p>`
+//             };
             
-            await transporter.sendMail(mailOptions, function (error, info) {
-                if(error) {
-                    resp.sendStatus(400);
-                }
-                else {
-                    console.log('Email sent: ' + info.response);
-                    req.session.privateCode = code;
-                    console.log(req.session.privateCode);
-                    resp.json(user);
-                }
-            })
-        }
-        else {
-            resp.sendStatus(401);
-        }
-    } catch (err) {
-        console.log(err);
-        resp.sendStatus(500);
-    }
-});
+//             await transporter.sendMail(mailOptions, function (error, info) {
+//                 if(error) {
+//                     resp.sendStatus(400);
+//                 }
+//                 else {
+//                     console.log('Email sent: ' + info.response);
+//                     req.session.privateCode = code;
+//                     console.log(req.session.privateCode);
+//                     resp.json(user);
+//                 }
+//             })
+//         }
+//         else {
+//             resp.sendStatus(401);
+//         }
+//     } catch (err) {
+//         console.log(err);
+//         resp.sendStatus(500);
+//     }
+// });
 
 /**
  * Officially register new user
