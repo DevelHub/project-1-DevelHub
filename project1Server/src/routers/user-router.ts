@@ -59,35 +59,35 @@ export const userRouter = express.Router();
 /**
  * Officially register new user
  */
-userRouter.post('/registration/new', async (req, resp) => {
-    try {
-        console.log(req.session.privateCode);
-        if(req.session.privateCode !== req.body.privateCode) {
-            resp.sendStatus(400);
-        }
-        else {
-            const email = req.session.user.email;
-            const password = req.body.password;
-            const saltRounds = 10;
-            // bcrypt.hash(password, saltRounds, async (err, hash) => { 
-                const hash = await bcrypt.hashSync(password, saltRounds);
-                const userNew = await userDao.fillNewUser(req.body.username, hash, req.body.firstname, req.body.lastname, email);
-                const user = await userDao.findByUsernameAndPassword(req.body.username, req.body.password);
-                if(user) {
-                    req.session.privateCode = null;
-                    req.session.user = user;
-                    resp.json(user);
-                }
-                else {
-                    resp.sendStatus(401);
-                }
-            //  })
-        }
-    } catch (err) {
-        console.log(err);
-        resp.sendStatus(500);
-    }
-});
+// userRouter.post('/registration/new', async (req, resp) => {
+//     try {
+//         console.log(req.session.privateCode);
+//         if(req.session.privateCode !== req.body.privateCode) {
+//             resp.sendStatus(400);
+//         }
+//         else {
+//             const email = req.session.user.email;
+//             const password = req.body.password;
+//             const saltRounds = 10;
+//             // bcrypt.hash(password, saltRounds, async (err, hash) => { 
+//                 const hash = await bcrypt.hashSync(password, saltRounds);
+//                 const userNew = await userDao.fillNewUser(req.body.username, hash, req.body.firstname, req.body.lastname, email);
+//                 const user = await userDao.findByUsernameAndPassword(req.body.username, req.body.password);
+//                 if(user) {
+//                     req.session.privateCode = null;
+//                     req.session.user = user;
+//                     resp.json(user);
+//                 }
+//                 else {
+//                     resp.sendStatus(401);
+//                 }
+//             //  })
+//         }
+//     } catch (err) {
+//         console.log(err);
+//         resp.sendStatus(500);
+//     }
+// });
 
 /**
  * Check employee's autherithy
